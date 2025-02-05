@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-const MainLayout = () => {
+const MainLayout = () => {  
   return (
     <div>
       <Outlet />

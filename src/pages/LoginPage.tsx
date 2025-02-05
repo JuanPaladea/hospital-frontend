@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { loginUser } from "../api/sessionService";
-import LoginComponent from "../components/loginComponent.tsx";
 import toast from "react-hot-toast";
+import { LoginComponent } from "../components/LoginComponent";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

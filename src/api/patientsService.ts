@@ -10,8 +10,18 @@ export const fetchPatients = async (page: string, limit: string) => {
   return response.data
 }
 
-export const fetchPatient = async (id: string) => {
+export const fetchPatientById = async (id: string) => {
   const response = await api.get(`/patients/${id}`)
+  return response.data
+}
+
+export const fetchPatientByDni = async (dni: string) => {
+  const response = await api.get(`/patients/dni/${dni}`)
+  return response.data
+}
+
+export const fetchPatientDetails = async (id: string) => {
+  const response = await api.get(`/patients/${id}/details`)
   return response.data
 }
 

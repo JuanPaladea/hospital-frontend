@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 interface LoginComponentProps {
   email: string;
@@ -10,7 +11,7 @@ interface LoginComponentProps {
   handleLogin: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const loginComponent: React.FC<LoginComponentProps> = ({ email, setEmail, password, setPassword, error, loading, handleLogin }) => {
+export const LoginComponent: React.FC<LoginComponentProps> = ({ email, setEmail, password, setPassword, error, loading, handleLogin }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
@@ -40,10 +41,11 @@ const loginComponent: React.FC<LoginComponentProps> = ({ email, setEmail, passwo
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+          <p className="mt-2">
+            Don't have an account? <Link to="/register" className="text-blue-600">Register</Link>
+          </p>
         </form>
       </div>
     </div>
   )
 }
-
-export default loginComponent;
