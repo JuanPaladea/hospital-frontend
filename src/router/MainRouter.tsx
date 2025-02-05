@@ -6,6 +6,8 @@ import RegisterPage from "../pages/RegisterPage"
 import DashBoardPage from "../pages/DashBoardPage"
 import PatientsPage from "../pages/PatientsPage"
 import AddPatientPage from "../pages/AddPatientPage"
+import StudiesPage from "../pages/StudiesPage"
+import AddStudyPage from "../pages/AddStudyPage"
 
 const MainRouter = () => {
   return (
@@ -19,6 +21,8 @@ const MainRouter = () => {
         <Route path="/dashboard" element={<DashBoardPage />} />
         <Route path="/patients" element={<PatientsPage />} />
         <Route path="/patients/add" element={<AddPatientPage />} />
+        <Route path="/studies" element={<StudiesPage />} />
+        <Route path="/studies/add" element={<AddStudyPage />} />
       </Route>
     </Routes>
   )
