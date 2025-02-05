@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Patient from "../types/Patient";
 import { fetchPatients } from "../api/patientsService";
 import { PatientsListComponent } from "../components/PatientsListComponent";
-import { PatientsPaginationComponent } from "../components/PatientsPaginationComponent";
+import { PaginationComponent } from "../components/PaginationComponent";
 
 const PatientsPage = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -33,7 +33,7 @@ const PatientsPage = () => {
   return (
     <>
       <PatientsListComponent patients={patients} loading={loading} error={error} />
-      <PatientsPaginationComponent page={page} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <PaginationComponent page={page} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }

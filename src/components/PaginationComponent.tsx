@@ -1,10 +1,10 @@
-interface PatientsPaginationComponentProps {
+interface PaginationComponentProps {
   page: number;
   handlePrevious: () => void;
   handleNext: () => void;
 }
 
-export const PatientsPaginationComponent: React.FC<PatientsPaginationComponentProps> = ({ page, handlePrevious, handleNext }) => {
+export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, handlePrevious, handleNext }) => {
   return (
     <div className="flex items-center justify-between mt-4">
       <button
