@@ -26,7 +26,7 @@ const AddStudyPage = () => {
       await createStudy({ type, status, patient_id });
       navigate("/studies");
     } catch (err: any) {
-      setError(err.message || "Failed to add study");
+      setError(err || "Failed to add study");
     } finally {
       setLoading(false);
     }

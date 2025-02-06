@@ -1,30 +1,23 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-import { loginUser } from "../api/sessionService";
-import toast from "react-hot-toast";
 import { LoginComponent } from "../components/LoginComponent";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { login, loading } = useAuth();
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
     try {
-      await loginUser(email, password);
-      toast.success("Login successful");
+      await login(email, password);
+      // If login is successful, navigate to the protected route.
       navigate("/dashboard");
     } catch (err: any) {
-      toast.error(err.message || "Login failed");
-      setError(err.message || "Login failed");
-    } finally {
-      setLoading(false);
+      setError(err || "Login failed");
     }
   };
   

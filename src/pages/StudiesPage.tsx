@@ -18,7 +18,7 @@ const StudiesPage = () => {
       .then((data) => {
         setStudies(data.studies);
       })
-      .catch((error) => setError(error.message))
+      .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, [page, size]);
 

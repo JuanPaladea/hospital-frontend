@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const DashBoardComponent: React.FC = () => {
   const sections = [
     { name: "Patients", path: "/patients", color: "bg-blue-500" },
-    { name: "Billing", path: "/billing", color: "bg-green-500" },
+    { name: "Bills", path: "/bills", color: "bg-green-500" },
     { name: "Studies", path: "/studies", color: "bg-purple-500" },
   ];
 

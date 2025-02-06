@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
-import Patient from "../types/Patient";
-import { fetchPatients } from "../api/patientsService";
-import { PatientsListComponent } from "../components/PatientsListComponent";
+import Bill from "../types/Bill";
+import { fetchBills } from "../api/billsService";
+import { BillsListComponent } from "../components/BillsListComponent";
 import { PaginationComponent } from "../components/PaginationComponent";
 
-const PatientsPage = () => {
-  const [patients, setPatients] = useState<Patient[]>([]);
+const BillsPage = () => {
+  const [bills, setBills] = useState<Bill[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
 
   useEffect(() => {
-    fetchPatients(page.toString(), size.toString())
-      .then((data) => {
-        setPatients(data.patients);
-      })
-      .catch((error) => setError(error))
+    fetchBills(page.toString(), size.toString())
+      .then((data) => setBills(data))
+      .catch((err) => setError(err))
       .finally(() => setLoading(false));
-    }, [page, size]);
-  
+  }, [page, size]);
+
   const handlePrevious = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -32,10 +30,10 @@ const PatientsPage = () => {
 
   return (
     <>
-      <PatientsListComponent patients={patients} loading={loading} error={error} />
+      <BillsListComponent bills={bills} loading={loading} error={error} />
       <PaginationComponent page={page} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }
 
-export default PatientsPage
+export default BillsPage

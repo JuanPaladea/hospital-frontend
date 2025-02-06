@@ -20,7 +20,7 @@ export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ pat
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      {!loading && !error && (
+      {!loading && !error && patients?.length > 0 && (
         <>
           <table className="min-w-full bg-white border">
             <thead>
@@ -89,6 +89,9 @@ export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ pat
             </tbody>
           </table>
         </>
+      )}
+      {!loading && !error && patients?.length === 0 && (
+        <p>No patients found.</p>
       )}
     </>
   )

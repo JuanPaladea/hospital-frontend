@@ -26,7 +26,7 @@ const AddPatientPage = () => {
       await createPatient({ name, age, dni });
       navigate("/patients");
     } catch (err: any) {
-      setError(err.message || "Failed to add patient");
+      setError(err || "Failed to add patient");
     } finally {
       setLoading(false);
     }
