@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Study from "../types/Study";
 import { useNavigate } from "react-router";
 import { fetchStudies } from "../api/studiesService";
-import StudiesListComponent from "../components/StudiesListComponent";
+import StudiesListComponent from "../components/Studies/StudiesListComponent";
 import { PaginationComponent } from "../components/PaginationComponent";
 
 const StudiesPage = () => {
@@ -16,7 +16,7 @@ const StudiesPage = () => {
   useEffect(() => {
     fetchStudies(page.toString(), size.toString())
       .then((data) => {
-        setStudies(data.studies);
+        setStudies(data.data);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));

@@ -1,11 +1,4 @@
 interface AddBillComponentProps {
-  // const [patientId, setPatientId] = useState<string>("");
-  // const [amount, setAmount] = useState<string>("");
-  // const [studyId, setStudyId] = useState<string>("");
-  // const [status, setStatus] = useState<"paid" | "unpaid" | "canceled">("unpaid");
-  // const [error, setError] = useState<string | null>(null);
-  // const [loading, setLoading] = useState<boolean>(false);
-  
   patientId: string;
   setPatientId: React.Dispatch<React.SetStateAction<string>>;
   amount: string;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Patient from "../types/Patient";
 import { fetchPatients } from "../api/patientsService";
-import { PatientsListComponent } from "../components/PatientsListComponent";
 import { PaginationComponent } from "../components/PaginationComponent";
+import { PatientsListComponent } from "../components/Patients/PatientsListComponent";
 
 const PatientsPage = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -14,7 +14,7 @@ const PatientsPage = () => {
   useEffect(() => {
     fetchPatients(page.toString(), size.toString())
       .then((data) => {
-        setPatients(data.patients);
+        setPatients(data.data);
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));

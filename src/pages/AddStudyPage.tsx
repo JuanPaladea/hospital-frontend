@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { createStudy } from "../api/studiesService";
-import { AddStudyComponent } from "../components/AddStudyComponent";
+import { AddStudyComponent } from "../components/Studies/AddStudyComponent";
 
 const AddStudyPage = () => {
   const [type, setType] = useState<string>("");

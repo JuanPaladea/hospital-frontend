@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Bill from "../types/Bill";
 import { fetchBills } from "../api/billsService";
-import { BillsListComponent } from "../components/BillsListComponent";
+import { BillsListComponent } from "../components/Bills/BillsListComponent";
 import { PaginationComponent } from "../components/PaginationComponent";
 
 const BillsPage = () => {
@@ -13,7 +13,7 @@ const BillsPage = () => {
 
   useEffect(() => {
     fetchBills(page.toString(), size.toString())
-      .then((data) => setBills(data))
+      .then((data) => setBills(data.data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, [page, size]);

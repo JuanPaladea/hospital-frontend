@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-import { LoginComponent } from "../components/LoginComponent";
+import { LoginComponent } from "../components/Auth/LoginComponent";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
@@ -14,7 +14,6 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      // If login is successful, navigate to the protected route.
       navigate("/dashboard");
     } catch (err: any) {
       setError(err || "Login failed");

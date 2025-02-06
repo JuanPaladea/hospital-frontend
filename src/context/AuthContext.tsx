@@ -52,8 +52,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // After successful login, call refreshUser() to update the context.
       await refreshUser();
     } catch (err: any) {
-      throw err.response?.data?.message || "Login failed"
       setUser(null);
+      throw err.response?.data?.message || "Login failed"
     } finally {
       setLoading(false);
     }
@@ -69,8 +69,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // After successful login, call refreshUser() to update the context.
       await refreshUser();
     } catch (err: any) {
-      throw err.response?.data?.message || "Registration failed"
       setUser(null);
+      throw err.response?.data?.message || "Registration failed"
     } finally {
       setLoading(false);
     }

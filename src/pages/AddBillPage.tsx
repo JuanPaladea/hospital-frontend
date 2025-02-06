@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
 import { createBill } from "../api/billsService";
-import { AddBillComponent } from "../components/AddBillComponent";
+import { AddBillComponent } from "../components/Bills/AddBillComponent";
 
 const AddBillPage = () => {
   const [patientId, setPatientId] = useState<string>("");

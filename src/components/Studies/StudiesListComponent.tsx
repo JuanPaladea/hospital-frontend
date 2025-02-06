@@ -1,83 +1,81 @@
 import { Link } from "react-router";
-import Bill from "../types/Bill";
+import Study from "../../types/Study";
 
-interface BillsListComponentProps {
-  bills: Bill[];
+interface StudiesListComponentProps {
+  studies: Study[];
   loading: boolean;
   error: string | null;
 }
 
-export const BillsListComponent: React.FC<BillsListComponentProps> = ({ bills, loading, error }) => {
+export const StudiesListComponent: React.FC<StudiesListComponentProps> = ({ studies, loading, error }) => {
   return (
-    <div className="p-6">
+    <>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Bills</h1>
-        {/* Link to Add Bill Form */}
+        <h1 className="text-2xl font-bold">Studies</h1>
+        {/* Link to Add Study Form */}
         <Link
-          to="/bills/add"
+          to="/studies/add"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          Add Bill
+          Add Study
         </Link>
       </div>
 
-      {loading && <p>Loading bills...</p>}
+      {loading && <p>Loading studies...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      {!loading && !error && bills?.length > 0 && (
+      {!loading && !error && studies?.length > 0 && (
         <>
           <table className="min-w-full bg-white border">
             <thead>
               <tr>
                 <th className="py-2 px-4 border">ID</th>
-                <th className="py-2 px-4 border">Patient ID</th>
-                <th className="py-2 px-4 border">Amount</th>
-                <th className="py-2 px-4 border">Date</th>
+                <th className="py-2 px-4 border">Type</th>
                 <th className="py-2 px-4 border">Status</th>
-                <th className="py-2 px-4 border">Study ID</th>
+                <th className="py-2 px-4 border">Date</th>
+                <th className="py-2 px-4 border">Patient ID</th>
                 <th className="py-2 px-4 border">Created At</th>
                 <th className="py-2 px-4 border">Updated At</th>
                 <th className="py-2 px-4 border">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {bills.map((bill) => (
-                <tr key={bill.id} className="text-center">
-                  <td className="py-2 px-4 border">{bill.id}</td>
-                  <td className="py-2 px-4 border">{bill.patient_id}</td>
-                  <td className="py-2 px-4 border">${bill.amount.toFixed(2)}</td>
+              {studies.map((study) => (
+                <tr key={study.id} className="text-center">
+                  <td className="py-2 px-4 border">{study.id}</td>
+                  <td className="py-2 px-4 border">{study.type}</td>
+                  <td className="py-2 px-4 border">{study.status}</td>
                   <td className="py-2 px-4 border">
-                    {new Date(bill.date).toLocaleString()}
+                    {new Date(study.date).toLocaleString()}
                   </td>
-                  <td className="py-2 px-4 border">{bill.status}</td>
-                  <td className="py-2 px-4 border">{bill.study_id}</td>
+                  <td className="py-2 px-4 border">{study.patient_id}</td>
                   <td className="py-2 px-4 border">
-                    {new Date(bill.created_at).toLocaleString()}
+                    {new Date(study.created_at).toLocaleString()}
                   </td>
                   <td className="py-2 px-4 border">
-                    {new Date(bill.updated_at).toLocaleString()}
+                    {new Date(study.updated_at).toLocaleString()}
                   </td>
                   <td className="py-2 px-4 border space-x-2">
-                    {/* View Bill (using bill id) */}
+                    {/* View study */}
                     <Link
-                      to={`/bills/${bill.id}`}
+                      to={`/studies/${study.id}`}
                       className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                     >
                       View
                     </Link>
-                    {/* Edit Bill */}
+                    {/* Edit study */}
                     <Link
-                      to={`/bills/${bill.id}/edit`}
+                      to={`/studies/${study.id}/edit`}
                       className="bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600"
                     >
                       Edit
                     </Link>
-                    {/* Optionally, you can add a button for uploading payment proof */}
+                    {/* Upload result */}
                     <Link
-                      to={`/bills/${bill.id}/upload-payment`}
+                      to={`/studies/${study.id}/upload-result`}
                       className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
                     >
-                      Upload Payment
+                      Upload Result
                     </Link>
                   </td>
                 </tr>
@@ -86,9 +84,11 @@ export const BillsListComponent: React.FC<BillsListComponentProps> = ({ bills, l
           </table>
         </>
       )}
-      {!loading && !error && bills?.length === 0 && (
-        <p>No bills found.</p>
+      {!loading && !error && studies?.length === 0 && (
+        <p>No studies found.</p>
       )}
-    </div>
+    </>
   )
 }
+
+export default StudiesListComponent;

@@ -1,45 +1,30 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router";
-// import toast from "react-hot-toast";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router";
+import { RegisterComponent } from "../components/Auth/RegisterComponent";
 
-// import { RegisterComponent } from "../components/RegisterComponent";
+const RegisterPage = () => {
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [password2, setPassword2] = useState<string>("");
+  const { register, loading } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-// const RegisterPage = () => {
-//   const [username, setUsername] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [password2, setPassword2] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
-
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await register(username, email, password);
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError(err || "Register failed");
+    }
+  };
   
-//   const handleRegister = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError("");
-    
-//     if (password !== password2) {
-//       setError("Passwords do not match");
-//       setLoading(false);
-//       return;
-//     }
+  return (
+    <RegisterComponent username={username} setUsername={setUsername} email={email} setEmail={setEmail} password={password} setPassword={setPassword} password2={password2} setPassword2={setPassword2} error={error} loading={loading} handleRegister={handleRegister} />
+  );
+};
 
-//     try {
-//       await registerUser(username, email, password);
-//       toast.success("Login successful");
-//       navigate("/dashboard");
-//     } catch (err: any) {
-//       toast.error(err || "Registration failed");
-//       setError(err || "Registration failed");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-  
-//   return (
-//     <RegisterComponent username={username} setUsername={setUsername} email={email} setEmail={setEmail} password={password} setPassword={setPassword} password2={password2} setPassword2={setPassword2} error={error} loading={loading} handleRegister={handleRegister} />
-//   );
-// };
-
-// export default RegisterPage;
+export default RegisterPage;
