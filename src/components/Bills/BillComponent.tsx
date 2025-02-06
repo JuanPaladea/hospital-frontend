@@ -25,6 +25,12 @@ export const BillComponent: React.FC<BillComponentProps> = ({ bill, loading, err
             <span className="font-bold">Amount:</span> {bill.amount}
           </p>
           <p>
+            <span className="font-bold">Date:</span> {new Date(bill.date).toLocaleDateString()}
+          </p>
+          <p>
+            <span className="font-bold">Status:</span> {bill.status}
+          </p>
+          <p>
             <span className="font-bold">Created At:</span>{" "}
             {new Date(bill.created_at).toLocaleString()}
           </p>

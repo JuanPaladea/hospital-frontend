@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router"
+import { Navigate, Route, Routes } from "react-router"
 import AuthLayout from "../layouts/AuthLayout"
 import MainLayout from "../layouts/MainLayout"
 import LoginPage from "../pages/LoginPage"
@@ -14,10 +14,13 @@ import PatientPage from "../pages/PatientPage"
 import StudyPage from "../pages/StudyPage"
 import BillPage from "../pages/BillPage"
 import EditBillPage from "../pages/EditBillPage"
+import { useAuth } from "../context/AuthContext"
 
 const MainRouter = () => {
+  const user = useAuth()
   return (
     <Routes>
+      <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} replace/> } />
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

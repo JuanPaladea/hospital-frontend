@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+// src/pages/EditBillPage.tsx
+import { useEffect, useState, FormEvent } from "react";
+import { useNavigate, useParams } from "react-router";
 import Bill from "../types/Bill";
 import { EditBillComponent } from "../components/Bills/EditBillComponent";
 import { fetchBillById, updateBill } from "../api/billsService";
@@ -9,40 +10,60 @@ const EditBillPage = () => {
   const [bill, setBill] = useState<Bill | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     if (billId) {
       fetchBillById(billId)
         .then((data) => {
+          // Assume data.data is the Bill object
           setBill(data.data);
         })
-        .catch((error) => setError(error))
+        .catch((err) => setError(err))
         .finally(() => setLoading(false));
     } else {
       setError("Bill ID is undefined");
       setLoading(false);
     }
   }, [billId]);
-  
-  const onUpdate = async (billId: string, bill: Bill) => {
+
+  const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!billId || !bill) return;
+    setLoading(true);
+    setError("");
+
     try {
-      const response = await updateBill(billId, bill)
-      setBill(response.data)
-    } catch (error: any) {
-      setError(error)
+      await updateBill(billId, bill);
+      navigate(`/bills/${billId}`);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Failed to update bill");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // A generic change handler for form fields
+  const handleFieldChange = (field: keyof Bill, value: any) => {
+    if (bill) {
+      setBill({ ...bill, [field]: value });
     }
   };
 
   return (
     <>
-      <EditBillComponent
-        bill={bill}
-        loading={loading}
-        error={error}
-        onUpdate={onUpdate}
+      {bill && (
+        <EditBillComponent
+          bill={bill}
+          loading={loading}
+          error={error}
+          handleUpdate={handleUpdate}
+          onFieldChange={handleFieldChange}
         />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default EditBillPage
+export default EditBillPage;
