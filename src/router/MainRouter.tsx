@@ -15,6 +15,9 @@ import StudyPage from "../pages/StudyPage"
 import BillPage from "../pages/BillPage"
 import EditBillPage from "../pages/EditBillPage"
 import { useAuth } from "../context/AuthContext"
+import EditPatientPage from "../pages/EditPatientPage"
+import EditStudyPage from "../pages/EditStudyPage"
+import UploadStudyPage from "../pages/UploadStudyPage"
 
 const MainRouter = () => {
   const user = useAuth()
@@ -30,9 +33,12 @@ const MainRouter = () => {
         <Route path="/patients" element={<PatientsPage />} />
         <Route path="/patients/add" element={<AddPatientPage />} />
         <Route path="/patients/:patientId" element={<PatientPage />} />
+        <Route path="/patients/:patientId/edit" element={<EditPatientPage />} />
         <Route path="/studies" element={<StudiesPage />} />
         <Route path="/studies/add" element={<AddStudyPage />} />
         <Route path="/studies/:studyId" element={<StudyPage />} />
+        <Route path="/studies/:studyId/edit" element={<EditStudyPage />} />
+        <Route path="/studies/:studyId/upload-result" element={<UploadStudyPage />} />
         <Route path="/bills" element={<BillsPage />} />
         <Route path="/bills/add" element={<AddBillPage />} />
         <Route path="/bills/:billId" element={<BillPage />} />

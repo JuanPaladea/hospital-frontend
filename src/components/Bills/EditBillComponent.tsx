@@ -10,14 +10,7 @@ interface EditBillComponentProps {
   onFieldChange: (field: keyof Bill, value: any) => void;
 }
 
-export const EditBillComponent: React.FC<EditBillComponentProps> = ({
-  bill,
-  loading,
-  error,
-  handleUpdate,
-  onFieldChange,
-}) => {
-  // A generic change handler for both input and select elements
+export const EditBillComponent: React.FC<EditBillComponentProps> = ({bill, loading, error, handleUpdate, onFieldChange,}) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = e.target;
     onFieldChange(id as keyof Bill, value);
