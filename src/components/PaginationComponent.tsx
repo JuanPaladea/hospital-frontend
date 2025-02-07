@@ -1,10 +1,12 @@
 interface PaginationComponentProps {
   page: number;
+  size: number;
+  handleSize: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePrevious: () => void;
   handleNext: () => void;
 }
 
-export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, handlePrevious, handleNext }) => {
+export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, size, handleSize, handlePrevious, handleNext }) => {
   return (
     <div className="flex items-center justify-between mt-4">
       <button
@@ -23,6 +25,13 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, 
       >
         Next
       </button>
+      <div className="ml-4">
+        <select value={size} onChange={handleSize} className="border p-2 rounded">
+          <option value={5}>5 per page</option>
+          <option value={10}>10 per page</option>
+          <option value={20}>20 per page</option>
+        </select>
+      </div>
     </div>
   )
 }

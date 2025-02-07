@@ -1,16 +1,13 @@
 import api from "./axiosConfig"
 
-export const fetchPatients = async (page: string, limit: string) => {
+export const fetchPatients = async (page: string, size: string, search: string) => {
   try {
     const response = await api.get("/patients", {
-      params: {
-        page,
-        limit
-      }
-    })
-    return response.data
+      params: { page, size, search }
+    });
+    return response.data;
   } catch (error: any) {
-    throw error.response?.data?.message || "Error fetching patients"
+    throw error.response?.data?.message || "Error fetching patients";
   }
 }
 

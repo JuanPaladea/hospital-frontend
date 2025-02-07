@@ -18,6 +18,8 @@ import { useAuth } from "../context/AuthContext"
 import EditPatientPage from "../pages/EditPatientPage"
 import EditStudyPage from "../pages/EditStudyPage"
 import UploadStudyPage from "../pages/UploadStudyPage"
+import UploadPaymentPage from "../pages/UploadPaymentPage"
+import PatientDetailsPage from "../pages/PatientDetailsPage"
 
 const MainRouter = () => {
   const user = useAuth()
@@ -33,6 +35,7 @@ const MainRouter = () => {
         <Route path="/patients" element={<PatientsPage />} />
         <Route path="/patients/add" element={<AddPatientPage />} />
         <Route path="/patients/:patientId" element={<PatientPage />} />
+        <Route path="/patients/:patientId/details" element={<PatientDetailsPage />} />
         <Route path="/patients/:patientId/edit" element={<EditPatientPage />} />
         <Route path="/studies" element={<StudiesPage />} />
         <Route path="/studies/add" element={<AddStudyPage />} />
@@ -43,6 +46,7 @@ const MainRouter = () => {
         <Route path="/bills/add" element={<AddBillPage />} />
         <Route path="/bills/:billId" element={<BillPage />} />
         <Route path="/bills/:billId/edit" element={<EditBillPage />} />
+        <Route path="/bills/:billId/upload-payment" element={<UploadPaymentPage />} />
       </Route>
     </Routes>
   )

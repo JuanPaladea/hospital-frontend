@@ -3,11 +3,13 @@ import Patient from "../../types/Patient"
 
 interface PatientListComponentProps {
   patients: Patient[];
+  search: string;
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
   loading: boolean;
   error: string | null;
 }
 
-export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ patients, loading, error }) => {
+export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ patients, search, handleSearch, loading, error }) => {
   return (
     <>
       <h1 className="text-2xl font-bold mb-4">Patients</h1>
@@ -19,6 +21,16 @@ export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ pat
       </Link>
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
+
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={search}
+          onChange={handleSearch}
+          className="border p-2 rounded w-full"
+        />
+      </div>
 
       {!loading && !error && patients?.length > 0 && (
         <>
