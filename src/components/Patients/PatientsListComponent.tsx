@@ -90,10 +90,10 @@ export const PatientsListComponent: React.FC<PatientListComponentProps> = ({ pat
                     </Link>
                     {/* Access patient billing (by id or dni) */}
                     <Link
-                      to={`/billing/patient/${patient.id}`}
+                      to={`/bills/patient/${patient.id}`}
                       className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
                     >
-                      Billing
+                      Bills
                     </Link>
                   </td>
                 </tr>

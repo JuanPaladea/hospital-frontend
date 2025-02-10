@@ -11,6 +11,7 @@ const PatientsPage = () => {
   const [error, setError] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
 
   const debouncedSearch = useDebounce(search, 1000);
@@ -19,12 +20,14 @@ const PatientsPage = () => {
     const fetchData = async () => {
       setLoading(true);
       setError("");
+      
       try {
         const searchParam = debouncedSearch.trim() === "" ? undefined : debouncedSearch;
         const result = await fetchPatients(page.toString(), size.toString(), searchParam || "");
         setPatients(result.data);
+        setTotalPages(result.totalPages);
       } catch (err: any) {
-        setError(err.response?.data?.message || "Error fetching patients");
+        setError(err || "Error fetching patients");
       } finally {
         setLoading(false);
       }
@@ -56,7 +59,7 @@ const PatientsPage = () => {
   return (
     <>
       <PatientsListComponent patients={patients} search={search} handleSearch={handleSearchChange} loading={loading} error={error} />
-      <PaginationComponent page={page} size={size} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }

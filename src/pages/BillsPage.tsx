@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Bill from "../types/Bill";
 import { fetchBills } from "../api/billsService";
 import { BillsListComponent } from "../components/Bills/BillsListComponent";
@@ -10,12 +10,24 @@ const BillsPage = () => {
   const [error, setError] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    fetchBills(page.toString(), size.toString())
-      .then((data) => setBills(data.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
+    const fetchData = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const result = await fetchBills(page.toString(), size.toString());
+        setBills(result.data);
+        setTotalPages(result.totalPages);
+      } catch (err: any) {
+        setError(err || "Error fetching patients");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, [page, size]);
 
   const handlePrevious = () => {
@@ -28,10 +40,15 @@ const BillsPage = () => {
     setPage(page + 1);
   }
 
+  const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSize(Number(e.target.value));
+    setPage(1);
+  };
+
   return (
     <>
       <BillsListComponent bills={bills} loading={loading} error={error} />
-      <PaginationComponent page={page} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }

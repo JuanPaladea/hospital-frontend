@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Study from "../types/Study";
-import { useNavigate } from "react-router";
+
 import { fetchStudies } from "../api/studiesService";
 import StudiesListComponent from "../components/Studies/StudiesListComponent";
 import { PaginationComponent } from "../components/PaginationComponent";
@@ -11,15 +11,24 @@ const StudiesPage = () => {
   const [error, setError] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
-  const navigate = useNavigate();
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    fetchStudies(page.toString(), size.toString())
-      .then((data) => {
-        setStudies(data.data);
-      })
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
+    const fetchData = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const result = await fetchStudies(page.toString(), size.toString());
+        setStudies(result.data);
+        setTotalPages(result.totalPages);
+      } catch (err: any) {
+        setError(err || "Error fetching patients");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
   }, [page, size]);
 
   const handlePrevious = () => {
@@ -34,10 +43,15 @@ const StudiesPage = () => {
     }
   }
 
+  const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSize(Number(e.target.value));
+    setPage(1);
+  };
+
   return (
     <>
       <StudiesListComponent studies={studies} loading={loading} error={error} />
-      <PaginationComponent page={page} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }

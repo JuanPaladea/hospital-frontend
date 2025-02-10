@@ -20,6 +20,8 @@ import EditStudyPage from "../pages/EditStudyPage"
 import UploadStudyPage from "../pages/UploadStudyPage"
 import UploadPaymentPage from "../pages/UploadPaymentPage"
 import PatientDetailsPage from "../pages/PatientDetailsPage"
+import PatientStudiesPage from "../pages/PatientStudiesPage"
+import PatientBillsPage from "../pages/PatientBillsPage"
 
 const MainRouter = () => {
   const user = useAuth()
@@ -42,11 +44,13 @@ const MainRouter = () => {
         <Route path="/studies/:studyId" element={<StudyPage />} />
         <Route path="/studies/:studyId/edit" element={<EditStudyPage />} />
         <Route path="/studies/:studyId/upload-result" element={<UploadStudyPage />} />
+        <Route path="/studies/patient/:patientId" element={<PatientStudiesPage />} />
         <Route path="/bills" element={<BillsPage />} />
         <Route path="/bills/add" element={<AddBillPage />} />
         <Route path="/bills/:billId" element={<BillPage />} />
         <Route path="/bills/:billId/edit" element={<EditBillPage />} />
         <Route path="/bills/:billId/upload-payment" element={<UploadPaymentPage />} />
+        <Route path="/bills/patient/:patientId" element={<PatientBillsPage />} />
       </Route>
     </Routes>
   )

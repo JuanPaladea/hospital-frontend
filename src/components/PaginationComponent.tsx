@@ -1,12 +1,13 @@
 interface PaginationComponentProps {
   page: number;
   size: number;
+  totalPages: number;
   handleSize: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePrevious: () => void;
   handleNext: () => void;
 }
 
-export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, size, handleSize, handlePrevious, handleNext }) => {
+export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, size, totalPages, handleSize, handlePrevious, handleNext }) => {
   return (
     <div className="flex items-center justify-between mt-4">
       <button
@@ -17,10 +18,11 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({ page, 
         Previous
       </button>
       <span>
-        Page {page}
+        Page {page} of {totalPages}
       </span>
       <button
         onClick={handleNext}
+        disabled={page >= totalPages}
         className="bg-gray-300 px-4 py-2 rounded disabled:opacity-50"
       >
         Next
