@@ -1,11 +1,11 @@
-import { ChangeEvent, useEffect, useState } from "react";
+// src/pages/PatientsPage.tsx
+import { useEffect, useState } from "react";
 import Patient from "../types/Patient";
 import { fetchPatients } from "../api/patientsService";
 import { PaginationComponent } from "../components/PaginationComponent";
 import { PatientsListComponent } from "../components/Patients/PatientsListComponent";
-import useDebounce from "../hooks/useDebounce";
 
-const PatientsPage = () => {
+const PatientsPage: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -14,16 +14,16 @@ const PatientsPage = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
 
-  const debouncedSearch = useDebounce(search, 1000);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError("");
-      
       try {
-        const searchParam = debouncedSearch.trim() === "" ? undefined : debouncedSearch;
-        const result = await fetchPatients(page.toString(), size.toString(), searchParam || "");
+        const result = await fetchPatients(
+          page.toString(),
+          size.toString(),
+          search
+        );
         setPatients(result.data);
         setTotalPages(result.totalPages);
       } catch (err: any) {
@@ -35,33 +35,43 @@ const PatientsPage = () => {
 
     fetchData();
   }, [page, size, search]);
-  
+
   const handlePrevious = () => {
     if (page > 1) {
       setPage(page - 1);
     }
-  }
-
-  const handleNext = () => {
-    setPage(page + 1);
-  }
-
-  const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSize(Number(e.target.value));
-    setPage(1);
   };
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+  const handleNext = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSize(Number(e.target.value));
     setPage(1);
   };
 
   return (
     <>
-      <PatientsListComponent patients={patients} search={search} handleSearch={handleSearchChange} loading={loading} error={error} />
-      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <PatientsListComponent
+        patients={patients}
+        search={search}
+        onSearch={(query: string) => setSearch(query)}
+        loading={loading}
+        error={error}
+      />
+      <PaginationComponent
+        page={page}
+        size={size}
+        totalPages={totalPages}
+        handleSize={handleSizeChange}
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+      />
     </>
-  )
-}
+  );
+};
 
-export default PatientsPage
+export default PatientsPage;
