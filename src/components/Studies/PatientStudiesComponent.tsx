@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Study from "../../types/Study";
 
 interface PatientStudiesComponentProps {
@@ -6,9 +7,11 @@ interface PatientStudiesComponentProps {
   error: string | null;
 }
 
-export const PatientStudiesComponent: React.FC<PatientStudiesComponentProps> = ({ studies, loading, error }) => {
+export const PatientStudiesComponent: React.FC<
+  PatientStudiesComponentProps
+> = ({ studies, loading, error }) => {
   return (
-    <div className="p-6">
+    <div className="mx-auto max-w-screen-xl py-3 px-4 lg:px-12">
       <h1 className="text-2xl font-bold mb-4">Patient Studies</h1>
       {loading && <p>Loading studies...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -16,25 +19,62 @@ export const PatientStudiesComponent: React.FC<PatientStudiesComponentProps> = (
         <p>No studies found for this patient.</p>
       )}
       {!loading && !error && studies.length > 0 && (
-        <div className="grid grid-cols-1 gap-4">
-          {studies.map((study) => (
-            <div key={study.id} className="bg-white shadow rounded p-4">
-              <p>
-                <strong>ID:</strong> {study.id}
-              </p>
-              <p>
-                <strong>Type:</strong> {study.type}
-              </p>
-              <p>
-                <strong>Status:</strong> {study.status}
-              </p>
-              <p>
-                <strong>Date:</strong>{" "}
-                {new Date(study.date).toLocaleString()}
-              </p>
-            </div>
-          ))}
-        </div>
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th className="px-4 py-3">ID</th>
+              <th className="px-4 py-3">Type</th>
+              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Date</th>
+              <th className="px-4 py-3">Patient ID</th>
+              <th className="px-4 py-3">Created At</th>
+              <th className="px-4 py-3">Updated At</th>
+              <th className="px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {studies.map((study) => (
+              <tr key={study.id}>
+                <td className="px-4 py-3">{study.id}</td>
+                <td className="px-4 py-3">{study.type}</td>
+                <td className="px-4 py-3">{study.status}</td>
+                <td className="px-4 py-3">
+                  {new Date(study.date).toLocaleString()}
+                </td>
+                <td className="px-4 py-3">{study.patient_id}</td>
+                <td className="px-4 py-3">
+                  {new Date(study.created_at).toLocaleString()}
+                </td>
+                <td className="px-4 py-3">
+                  {new Date(study.updated_at).toLocaleString()}
+                </td>
+                <td className="px-4 py-3 space-x-2">
+                  {/* View study */}
+                  <Link
+                    to={`/studies/${study.id}`}
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                  >
+                    View
+                  </Link>
+                  {/* Edit study */}
+                  <Link
+                    to={`/studies/${study.id}/edit`}
+                    className="bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600"
+                  >
+                    Edit
+                  </Link>
+                  {/* Upload result */}
+                  <Link
+                    to={`/studies/${study.id}/upload-result`}
+                    className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                  >
+                    Upload Result
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

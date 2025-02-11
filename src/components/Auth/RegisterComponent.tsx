@@ -1,20 +1,32 @@
 import { Link } from "react-router";
 
 interface registerComponentProps {
-    username: string;
-    setUsername: React.Dispatch<React.SetStateAction<string>>;
-    email: string;
-    setEmail: React.Dispatch<React.SetStateAction<string>>;
-    password: string;
-    setPassword: React.Dispatch<React.SetStateAction<string>>;
-    password2: string;
-    setPassword2: React.Dispatch<React.SetStateAction<string>>;
-    error: string | null;
-    loading: boolean;
-    handleRegister: (e: React.FormEvent<HTMLFormElement>) => void;
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  password2: string;
+  setPassword2: React.Dispatch<React.SetStateAction<string>>;
+  error: string | null;
+  loading: boolean;
+  handleRegister: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const RegisterComponent: React.FC<registerComponentProps> = ({ username, setUsername, email, setEmail, password, setPassword, password2, setPassword2, error, loading, handleRegister }) => {
+export const RegisterComponent: React.FC<registerComponentProps> = ({
+  username,
+  setUsername,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  password2,
+  setPassword2,
+  error,
+  loading,
+  handleRegister,
+}) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
@@ -61,10 +73,13 @@ export const RegisterComponent: React.FC<registerComponentProps> = ({ username, 
             {loading ? "Registering..." : "Register"}
           </button>
           <p className="mt-2">
-            Already have an account? <Link to="/login" className="text-blue-600">Login</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600">
+              Login
+            </Link>
           </p>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -47,8 +47,8 @@ const BillsPage = () => {
 
   return (
     <>
-      <BillsListComponent bills={bills} loading={loading} error={error} />
-      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <BillsListComponent bills={bills} size={size} handleSize={handleSizeChange} loading={loading} error={error} />
+      <PaginationComponent page={page} setPage={setPage} totalPages={totalPages} handlePrevious={handlePrevious} handleNext={handleNext} />
     </>
   )
 }

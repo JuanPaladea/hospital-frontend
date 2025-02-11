@@ -8,21 +8,24 @@ const DashBoardComponent: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6">Medical Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {sections.map((section) => (
-          <div
-            key={section.path}
-            className={`${section.color} text-white p-6 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition-transform tap:scale-95 `}
-          >
-            <Link to={section.path} className="flex flex-col items-center">
-              <h2 className="text-xl font-semibold">{section.name}</h2>
+    <section className="text-gray-600 body-font">
+      <div className="mx-auto max-w-screen-xl px-4 lg:px-12 py-24">
+        <div className="flex flex-wrap -m-4">
+          {sections.map((section) => (
+            <Link to={section.path} key={section.path} className="p-4 lg:w-1/3">
+              <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+                <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+                  {section.name}
+                </h1>
+                <p className="leading-relaxed mb-3">
+                  View, Create and Edit {section.name}{" "}
+                </p>
+              </div>
             </Link>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

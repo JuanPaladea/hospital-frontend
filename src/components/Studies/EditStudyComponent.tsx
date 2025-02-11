@@ -9,7 +9,13 @@ interface EditStudyComponentProps {
   onFieldChange: (field: keyof Study, value: any) => void;
 }
 
-const EditStudyComponent: React.FC<EditStudyComponentProps> = ({ study, loading, error, handleUpdate, onFieldChange,}) => {
+const EditStudyComponent: React.FC<EditStudyComponentProps> = ({
+  study,
+  loading,
+  error,
+  handleUpdate,
+  onFieldChange,
+}) => {
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -18,82 +24,72 @@ const EditStudyComponent: React.FC<EditStudyComponentProps> = ({ study, loading,
   };
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit Study</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      <div className="bg-white p-4 rounded shadow">
-        <form onSubmit={handleUpdate} className="space-y-4">
-          {/* Type Field */}
-          <div className="mb-4">
-            <label
-              htmlFor="type"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Type *
-            </label>
-            <input
-              id="type"
-              type="text"
-              placeholder="Study type"
-              value={study.type}
-              onChange={handleInputChange}
-              required
-              className="w-full border p-2 rounded"
-            />
+    <section className="bg-white ">
+      <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <h2 className="mb-4 text-xl font-bold text-gray-900 ">
+          Edit study {study.id}
+        </h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form onSubmit={handleUpdate}>
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="type"
+                className="block mb-2 text-sm font-medium text-gray-900 "
+              >
+                Type
+              </label>
+              <input
+                type="text"
+                id="type"
+                value={study.type}
+                onChange={handleInputChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="status"
+                className="block mb-2 text-sm font-medium text-gray-900 "
+              >
+                Status
+              </label>
+              <select
+                id="status"
+                value={study.status}
+                onChange={handleInputChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              >
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+                <option value="canceled">Canceled</option>
+              </select>
+            </div>
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="patient_id"
+                className="block mb-2 text-sm font-medium text-gray-900 "
+              >
+                Patient ID
+              </label>
+              <input
+                type="number"
+                id="patient_id"
+                value={study.patient_id}
+                onChange={handleInputChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
           </div>
-
-          {/* Status Field */}
-          <div className="mb-4">
-            <label
-              htmlFor="status"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Status *
-            </label>
-            <select
-              id="status"
-              value={study.status}
-              onChange={handleInputChange}
-              className="w-full border p-2 rounded"
-            >
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-              <option value="canceled">Canceled</option>
-            </select>
-          </div>
-
-          {/* Patient ID Field */}
-          <div className="mb-4">
-            <label
-              htmlFor="patient_id"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Patient ID *
-            </label>
-            <input
-              id="patient_id"
-              type="number"
-              placeholder="Patient ID"
-              value={study.patient_id}
-              onChange={handleInputChange}
-              required
-              className="w-full border p-2 rounded"
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              {loading ? "Saving..." : "Save Changes"}
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800 cursor-pointer"
+          >
+            {loading ? "Adding..." : "Edit study"}
+          </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -6,40 +6,69 @@ interface BillComponentProps {
   error: string | null;
 }
 
-export const BillComponent: React.FC<BillComponentProps> = ({ bill, loading, error }) => {
+export const BillComponent: React.FC<BillComponentProps> = ({
+  bill,
+  loading,
+  error,
+}) => {
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Bill Details</h1>
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
       {!loading && !error && bill && (
-        <div className="bg-white p-4 rounded shadow">
-          <p>
-            <span className="font-bold">ID:</span> {bill.id}
-          </p>
-          <p>
-            <span className="font-bold">Patient ID:</span> {bill.patient_id}
-          </p>
-          <p>
-            <span className="font-bold">Amount:</span> {bill.amount}
-          </p>
-          <p>
-            <span className="font-bold">Date:</span> {new Date(bill.date).toLocaleDateString()}
-          </p>
-          <p>
-            <span className="font-bold">Status:</span> {bill.status}
-          </p>
-          <p>
-            <span className="font-bold">Created At:</span>{" "}
-            {new Date(bill.created_at).toLocaleString()}
-          </p>
-          <p>
-            <span className="font-bold">Updated At:</span>{" "}
-            {new Date(bill.updated_at).toLocaleString()}
-          </p>
-        </div>
+        <section className="bg-white py-8 antialiased md:py-8">
+          <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
+            <div className="py-4 md:py-8">
+              <div className="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+                <div className="space-y-4">
+                  <div className="flex space-x-4">
+                    <div>
+                      <h2 className="flex items-center text-xl font-bold leading-none text-gray-900  sm:text-2xl">
+                        Bill {bill.id}
+                      </h2>
+                    </div>
+                  </div>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">ID</dt>
+                    <dd className="text-gray-500 ">{bill.id}</dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Amount</dt>
+                    <dd className="text-gray-500 ">{bill.amount}</dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Status</dt>
+                    <dd className="text-gray-500 ">{bill.status}</dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Date</dt>
+                    <dd className="text-gray-500 ">
+                      {new Date(bill.date).toLocaleDateString()}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Patient ID</dt>
+                    <dd className="text-gray-500 ">{bill.patient_id}</dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Created At</dt>
+                    <dd className="text-gray-500 ">
+                      {new Date(bill.created_at).toLocaleDateString()}
+                    </dd>
+                  </dl>
+                  <dl>
+                    <dt className="font-semibold text-gray-900 ">Updated At</dt>
+                    <dd className="text-gray-500 ">
+                      {new Date(bill.updated_at).toLocaleDateString()}
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       )}
     </>
   );
-}
+};

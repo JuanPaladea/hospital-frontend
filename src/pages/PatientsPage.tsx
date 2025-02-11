@@ -59,14 +59,15 @@ const PatientsPage: React.FC = () => {
         patients={patients}
         search={search}
         onSearch={(query: string) => setSearch(query)}
+        size={size}
+        handleSize={handleSizeChange}
         loading={loading}
         error={error}
       />
       <PaginationComponent
         page={page}
-        size={size}
+        setPage={setPage}
         totalPages={totalPages}
-        handleSize={handleSizeChange}
         handlePrevious={handlePrevious}
         handleNext={handleNext}
       />
