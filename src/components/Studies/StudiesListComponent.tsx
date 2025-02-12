@@ -19,7 +19,7 @@ export const StudiesListComponent: React.FC<StudiesListComponentProps> = ({
 }) => {
   return (
     <section className="bg-gray-50 p-3 sm:p-5">
-      <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div className="w-full md:w-1/2">
@@ -85,7 +85,15 @@ export const StudiesListComponent: React.FC<StudiesListComponentProps> = ({
                       <td className="px-4 py-3">
                         {new Date(study.date).toLocaleString()}
                       </td>
-                      <td className="px-4 py-3">{study.patient_id}</td>
+                      <td className="px-4 py-3">
+                        {study.patient_id}{" "}
+                        <Link
+                          to={`/patients/${study.patient_id}`}
+                          className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                        >
+                          View
+                        </Link>{" "}
+                      </td>
                       <td className="px-4 py-3">
                         {new Date(study.created_at).toLocaleString()}
                       </td>
@@ -93,21 +101,18 @@ export const StudiesListComponent: React.FC<StudiesListComponentProps> = ({
                         {new Date(study.updated_at).toLocaleString()}
                       </td>
                       <td className="px-4 py-3 space-x-2">
-                        {/* View study */}
                         <Link
                           to={`/studies/${study.id}`}
                           className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                         >
                           View
                         </Link>
-                        {/* Edit study */}
                         <Link
                           to={`/studies/${study.id}/edit`}
                           className="bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600"
                         >
                           Edit
                         </Link>
-                        {/* Upload result */}
                         <Link
                           to={`/studies/${study.id}/upload-result`}
                           className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"

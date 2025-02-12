@@ -9,14 +9,20 @@ interface EditPatientComponentProps {
   onFieldChange: (field: keyof Patient, value: any) => void;
 }
 
-const EditPatientComponent: React.FC<EditPatientComponentProps> = ({ patient, loading, error, handleUpdate, onFieldChange, }) => {
+const EditPatientComponent: React.FC<EditPatientComponentProps> = ({
+  patient,
+  loading,
+  error,
+  handleUpdate,
+  onFieldChange,
+}) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     onFieldChange(id as keyof Patient, value);
   };
   return (
     <section className="bg-white ">
-      <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <div className="py-8 px-4 2xl:px-0 mx-auto max-w-xl lg:py-16">
         <h2 className="mb-4 text-xl font-bold text-gray-900 ">
           Edit patient {patient.id}
         </h2>

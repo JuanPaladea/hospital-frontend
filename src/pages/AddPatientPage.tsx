@@ -19,7 +19,7 @@ const AddPatientPage = () => {
     if (!name) {
       setError("Name is required");
       setLoading(false);
-      return
+      return;
     }
 
     try {
@@ -34,9 +34,19 @@ const AddPatientPage = () => {
 
   return (
     <>
-      <AddPatientComponent name={name} setName={setName} age={age} setAge={setAge} dni={dni} setDni={setDni} error={error} loading={loading} handleSubmit={handleSubmit} />
+      <AddPatientComponent
+        name={name}
+        setName={setName}
+        age={age}
+        setAge={setAge}
+        dni={dni}
+        setDni={setDni}
+        error={error}
+        loading={loading}
+        handleSubmit={handleSubmit}
+      />
     </>
-  )
-}
+  );
+};
 
 export default AddPatientPage;

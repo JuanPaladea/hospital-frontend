@@ -15,7 +15,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
 }) => {
   return (
     <section className="bg-gray-50  p-3 sm:p-5">
-      <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
           <nav
             className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
@@ -30,7 +30,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
               </span>
             </span>
             <ul className="inline-flex items-stretch -space-x-px">
-              { page > 1 && (
+              {page > 1 && (
                 <li>
                   <button
                     onClick={handlePrevious}
@@ -78,7 +78,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
                   </button>
                 </li>
               )}
-              { page < totalPages && (
+              {page < totalPages && (
                 <li>
                   <button
                     onClick={handleNext}

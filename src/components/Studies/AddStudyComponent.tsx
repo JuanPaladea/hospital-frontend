@@ -23,7 +23,7 @@ export const AddStudyComponent: React.FC<AddStudyComponentProps> = ({
 }) => {
   return (
     <section className="bg-white ">
-      <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <div className="py-8 px-4 2xl:px-0 mx-auto max-w-xl lg:py-16">
         <h2 className="mb-4 text-xl font-bold text-gray-900 ">
           Add a new study
         </h2>

@@ -17,7 +17,6 @@ const EditBillPage = () => {
     if (billId) {
       fetchBillById(billId)
         .then((data) => {
-          // Assume data.data is the Bill object
           setBill(data.data);
         })
         .catch((err) => setError(err))
@@ -44,7 +43,6 @@ const EditBillPage = () => {
     }
   };
 
-  // A generic change handler for form fields
   const handleFieldChange = (field: keyof Bill, value: any) => {
     if (bill) {
       setBill({ ...bill, [field]: value });

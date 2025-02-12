@@ -16,10 +16,11 @@ const PatientDetailsPage: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetchPatientDetails(patientId!);
-        // Assuming response.data contains an object with patient, studies, and bills
         setDetails(response.data);
       } catch (err: any) {
-        setError(err.response?.data?.message || "Error fetching patient details");
+        setError(
+          err.response?.data?.message || "Error fetching patient details"
+        );
       } finally {
         setLoading(false);
       }
@@ -35,7 +36,11 @@ const PatientDetailsPage: React.FC = () => {
   return (
     <div>
       {details ? (
-        <PatientDetailsComponent details={details} loading={loading} error={error} />
+        <PatientDetailsComponent
+          details={details}
+          loading={loading}
+          error={error}
+        />
       ) : (
         <p>{loading ? "Loading patient details..." : error}</p>
       )}

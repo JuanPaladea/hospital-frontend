@@ -11,14 +11,12 @@ const UploadStudyPage: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
 
-  // Handle file input change
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
     }
   };
 
-  // Handle form submission to upload the file
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -32,7 +30,6 @@ const UploadStudyPage: React.FC = () => {
     setUploading(true);
     try {
       const response = await uploadResult(studyId as string, file);
-      console.log(response)
       setSuccess("File uploaded successfully.");
     } catch (err: any) {
       setError(err || "File upload failed.");

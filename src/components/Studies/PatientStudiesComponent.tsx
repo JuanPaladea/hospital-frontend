@@ -11,7 +11,7 @@ export const PatientStudiesComponent: React.FC<
   PatientStudiesComponentProps
 > = ({ studies, loading, error }) => {
   return (
-    <div className="mx-auto max-w-screen-xl py-3 px-4 lg:px-12">
+    <div className="mx-auto max-w-screen-xl py-3 px-4 2xl:px-0">
       <h1 className="text-2xl font-bold mb-4">Patient Studies</h1>
       {loading && <p>Loading studies...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -41,7 +41,15 @@ export const PatientStudiesComponent: React.FC<
                 <td className="px-4 py-3">
                   {new Date(study.date).toLocaleString()}
                 </td>
-                <td className="px-4 py-3">{study.patient_id}</td>
+                <td className="px-4 py-3">
+                  {study.patient_id}{" "}
+                  <Link
+                    to={`/patients/${study.patient_id}`}
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                  >
+                    View
+                  </Link>{" "}
+                </td>
                 <td className="px-4 py-3">
                   {new Date(study.created_at).toLocaleString()}
                 </td>
@@ -49,21 +57,18 @@ export const PatientStudiesComponent: React.FC<
                   {new Date(study.updated_at).toLocaleString()}
                 </td>
                 <td className="px-4 py-3 space-x-2">
-                  {/* View study */}
                   <Link
                     to={`/studies/${study.id}`}
                     className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                   >
                     View
                   </Link>
-                  {/* Edit study */}
                   <Link
                     to={`/studies/${study.id}/edit`}
                     className="bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600"
                   >
                     Edit
                   </Link>
-                  {/* Upload result */}
                   <Link
                     to={`/studies/${study.id}/upload-result`}
                     className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"

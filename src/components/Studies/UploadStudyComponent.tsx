@@ -26,7 +26,7 @@ const UploadStudyComponent: React.FC<UploadStudyComponentProps> = ({
           <input
             type="file"
             onChange={handleFileChange}
-            accept="image/*,application/pdf" // Adjust accepted file types as needed
+            accept="image/*,application/pdf"
           />
         </div>
         {error && <p className="text-red-500">{error}</p>}

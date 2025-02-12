@@ -1,9 +1,7 @@
-import DashBoardComponent from "../components/DashBoardComponent"
+import DashBoardComponent from "../components/DashBoardComponent";
 
 const DashBoardPage = () => {
-  return (
-    <DashBoardComponent />
-  )
-}
+  return <DashBoardComponent />;
+};
 
-export default DashBoardPage
+export default DashBoardPage;

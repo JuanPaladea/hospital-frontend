@@ -1,7 +1,6 @@
-import { Toaster } from "react-hot-toast"
-import { BrowserRouter } from "react-router"
-import MainRouter from "./router/MainRouter"
-
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter } from "react-router";
+import MainRouter from "./router/MainRouter";
 
 function App() {
   return (
@@ -9,7 +8,7 @@ function App() {
       <Toaster />
       <MainRouter />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

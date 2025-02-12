@@ -26,7 +26,7 @@ const StudiesPage = () => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchData();
   }, [page, size]);
@@ -35,13 +35,13 @@ const StudiesPage = () => {
     if (page > 1) {
       setPage(page - 1);
     }
-  }
+  };
 
-  const handleNext = () => { 
+  const handleNext = () => {
     if (page) {
       setPage(page + 1);
     }
-  }
+  };
 
   const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSize(Number(e.target.value));
@@ -50,10 +50,22 @@ const StudiesPage = () => {
 
   return (
     <>
-      <StudiesListComponent studies={studies} loading={loading} error={error} />
-      <PaginationComponent page={page} size={size} totalPages={totalPages} handleSize={handleSizeChange} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <StudiesListComponent
+        studies={studies}
+        size={size}
+        handleSize={handleSizeChange}
+        loading={loading}
+        error={error}
+      />
+      <PaginationComponent
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+      />
     </>
-  )
-}
+  );
+};
 
 export default StudiesPage;

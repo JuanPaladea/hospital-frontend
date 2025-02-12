@@ -12,14 +12,21 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (username: string, password: string) => Promise<void>;
-  register: (username: string, email: string, password: string) => Promise<void>;
+  register: (
+    username: string,
+    email: string,
+    password: string,
+    password2: string
+  ) => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -32,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(response.data.user);
     } catch (err: any) {
       setUser(null);
-      throw err.response?.data?.message || "Error fetching user"
+      throw err.response?.data?.message || "Error fetching user";
     } finally {
       setLoading(false);
     }
@@ -45,38 +52,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       setLoading(true);
-      await api.post(
-        "/session/login",
-        { email, password },
-      );
-      // After successful login, call refreshUser() to update the context.
+      await api.post("/session/login", { email, password });
       await refreshUser();
     } catch (err: any) {
       setUser(null);
-      throw err.response?.data?.message || "Login failed"
+      throw err.response?.data?.message || "Login failed";
     } finally {
       setLoading(false);
     }
   };
 
-  const register = async (username: string, email: string, password: string) => {
+  const register = async (
+    username: string,
+    email: string,
+    password: string,
+    password2: string
+  ) => {
     try {
       setLoading(true);
-      await api.post(
-        "/session/register",
-        { username, email, password },
-      );
-      // After successful login, call refreshUser() to update the context.
+      await api.post("/session/register", { username, email, password, password2 });
       await refreshUser();
     } catch (err: any) {
       setUser(null);
-      throw err.response?.data?.message || "Registration failed"
+      throw err.response?.data?.message || "Registration failed";
     } finally {
       setLoading(false);
     }
   };
 
-  // Logout function: clear the token on the backend if needed and update the context.
   const logout = async () => {
     try {
       await api.post("/session/logout");
@@ -88,13 +91,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshUser }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook for easy access to AuthContext
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {

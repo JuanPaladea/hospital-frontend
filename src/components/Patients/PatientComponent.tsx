@@ -18,7 +18,7 @@ export const PatientComponent: React.FC<PatientComponentProps> = ({
 
       {!loading && !error && patient && (
         <section className="bg-white py-8 antialiased md:py-8">
-          <div className="mx-auto max-w-screen-lg px-4 2xl:px-0">
+          <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <div className="py-4 md:py-8">
               <div className="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
                 <div className="space-y-4">

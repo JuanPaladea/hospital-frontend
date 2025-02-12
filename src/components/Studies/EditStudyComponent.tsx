@@ -25,7 +25,7 @@ const EditStudyComponent: React.FC<EditStudyComponentProps> = ({
 
   return (
     <section className="bg-white ">
-      <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <div className="py-8 px-4 2xl:px-0 mx-auto max-w-xl lg:py-16">
         <h2 className="mb-4 text-xl font-bold text-gray-900 ">
           Edit study {study.id}
         </h2>

@@ -19,9 +19,17 @@ const LoginPage = () => {
       setError(err || "Login failed");
     }
   };
-  
+
   return (
-    <LoginComponent email={email} setEmail={setEmail} password={password} setPassword={setPassword} error={error} loading={loading} handleLogin={handleLogin} />  
+    <LoginComponent
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      error={error}
+      loading={loading}
+      handleLogin={handleLogin}
+    />
   );
 };
 

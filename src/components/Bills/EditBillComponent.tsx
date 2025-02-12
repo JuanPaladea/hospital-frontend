@@ -10,15 +10,23 @@ interface EditBillComponentProps {
   onFieldChange: (field: keyof Bill, value: any) => void;
 }
 
-export const EditBillComponent: React.FC<EditBillComponentProps> = ({bill, loading, error, handleUpdate, onFieldChange,}) => {
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+export const EditBillComponent: React.FC<EditBillComponentProps> = ({
+  bill,
+  loading,
+  error,
+  handleUpdate,
+  onFieldChange,
+}) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { id, value } = e.target;
     onFieldChange(id as keyof Bill, value);
   };
 
   return (
     <section className="bg-white ">
-      <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+      <div className="py-8 px-4 2xl:px-0 mx-auto max-w-xl lg:py-16">
         <h2 className="mb-4 text-xl font-bold text-gray-900 ">
           Edit bill {bill.id}
         </h2>

@@ -6,21 +6,18 @@ import { uploadPayment } from "../api/billsService";
 
 const UploadPaymentPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // Local state for file, loading, error, and success messages
+
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
 
-  // Handler for file input changes
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
     }
   };
 
-  // Handler for form submission to upload the payment file
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -35,7 +32,6 @@ const UploadPaymentPage: React.FC = () => {
 
     try {
       const response = await uploadPayment(id as string, file);
-      console.log(response)
       setSuccess("Payment file uploaded successfully.");
     } catch (err: any) {
       setError(err || "File upload failed.");

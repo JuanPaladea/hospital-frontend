@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createBill } from "../api/billsService";
 import { AddBillComponent } from "../components/Bills/AddBillComponent";
@@ -7,7 +7,9 @@ const AddBillPage = () => {
   const [patientId, setPatientId] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
   const [studyId, setStudyId] = useState<string>("");
-  const [status, setStatus] = useState<"paid" | "unpaid" | "canceled">("unpaid");
+  const [status, setStatus] = useState<"paid" | "unpaid" | "canceled">(
+    "unpaid"
+  );
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -24,14 +26,19 @@ const AddBillPage = () => {
     }
 
     try {
-      await createBill({ patient_id: parseInt(patientId), amount: parseFloat(amount), study_id: parseInt(studyId), status });
+      await createBill({
+        patient_id: parseInt(patientId),
+        amount: parseFloat(amount),
+        study_id: parseInt(studyId),
+        status,
+      });
       navigate("/bills");
     } catch (err: any) {
       setError(err || "Failed to add bill");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <AddBillComponent
@@ -47,7 +54,7 @@ const AddBillPage = () => {
       loading={loading}
       handleSubmit={handleSubmit}
     />
-  )
-}
+  );
+};
 
-export default AddBillPage
+export default AddBillPage;

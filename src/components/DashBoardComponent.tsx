@@ -9,7 +9,7 @@ const DashBoardComponent: React.FC = () => {
 
   return (
     <section className="text-gray-600 body-font">
-      <div className="mx-auto max-w-screen-xl px-4 lg:px-12 py-24">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0 py-24">
         <div className="flex flex-wrap -m-4">
           {sections.map((section) => (
             <Link to={section.path} key={section.path} className="p-4 lg:w-1/3">

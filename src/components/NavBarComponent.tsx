@@ -18,13 +18,9 @@ const NavBarComponent: React.FC = () => {
 
   return (
     <nav className="bg-white w-full z-20 top-0 left-0 border-b border-gray-200">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 2xl:px-0">
         <Link to="/dashboard" className="flex items-center space-x-3">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
-            alt="Logo"
-          />
+          <img src="./src/assets/logo.png" className="h-8" alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             STANs
           </span>
@@ -42,12 +38,14 @@ const NavBarComponent: React.FC = () => {
               </button>
             </div>
           ) : (
-            <Link to="/login" className="text-gray-500 hover:text-gray-700 font-medium">
+            <Link
+              to="/login"
+              className="text-gray-500 hover:text-gray-700 font-medium"
+            >
               Login
             </Link>
           )}
-          
-          {/* Mobile menu toggle button */}
+
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -74,7 +72,6 @@ const NavBarComponent: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         <div
           className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
             menuOpen ? "block" : "hidden"

@@ -25,7 +25,7 @@ const BillsPage = () => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchData();
   }, [page, size]);
@@ -34,11 +34,11 @@ const BillsPage = () => {
     if (page > 1) {
       setPage(page - 1);
     }
-  }
+  };
 
   const handleNext = () => {
     setPage(page + 1);
-  }
+  };
 
   const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSize(Number(e.target.value));
@@ -47,10 +47,22 @@ const BillsPage = () => {
 
   return (
     <>
-      <BillsListComponent bills={bills} size={size} handleSize={handleSizeChange} loading={loading} error={error} />
-      <PaginationComponent page={page} setPage={setPage} totalPages={totalPages} handlePrevious={handlePrevious} handleNext={handleNext} />
+      <BillsListComponent
+        bills={bills}
+        size={size}
+        handleSize={handleSizeChange}
+        loading={loading}
+        error={error}
+      />
+      <PaginationComponent
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+      />
     </>
-  )
-}
+  );
+};
 
-export default BillsPage
+export default BillsPage;

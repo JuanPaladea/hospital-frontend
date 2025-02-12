@@ -24,11 +24,7 @@ const StudyPage = () => {
     }
   }, [studyId]);
 
-  return (
-    <>
-      <StudyComponent study={study} loading={loading} error={error} />
-    </>
-  )
-}
+  return <StudyComponent study={study} loading={loading} error={error} />;
+};
 
-export default StudyPage
+export default StudyPage;

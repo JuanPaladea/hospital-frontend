@@ -5,7 +5,7 @@ import { fetchBillById } from "../api/billsService";
 import { BillComponent } from "../components/Bills/BillComponent";
 
 const BillPage = () => {
-  const  { billId } = useParams<{ billId: string }>();
+  const { billId } = useParams<{ billId: string }>();
   const [bill, setBill] = useState<Bill | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -28,7 +28,7 @@ const BillPage = () => {
     <>
       <BillComponent bill={bill} loading={loading} error={error} />
     </>
-  )
-}
+  );
+};
 
-export default BillPage
+export default BillPage;

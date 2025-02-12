@@ -13,7 +13,6 @@ const EditStudyPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  // Fetch the study details when the page mounts
   useEffect(() => {
     if (studyId) {
       setLoading(true);
@@ -37,7 +36,6 @@ const EditStudyPage: React.FC = () => {
     }
   };
 
-  // Handler for submitting the update form
   const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!studyId || !study) return;

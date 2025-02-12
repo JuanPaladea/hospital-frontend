@@ -34,7 +34,11 @@ const PatientStudiesPage: React.FC = () => {
   }, [patientId]);
 
   return (
-    <PatientStudiesComponent studies={studies} loading={loading} error={error} />
+    <PatientStudiesComponent
+      studies={studies}
+      loading={loading}
+      error={error}
+    />
   );
 };
 

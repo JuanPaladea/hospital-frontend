@@ -15,15 +15,27 @@ const RegisterPage = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await register(username, email, password);
+      await register(username, email, password, password2);
       navigate("/dashboard");
     } catch (err: any) {
       setError(err || "Register failed");
     }
   };
-  
+
   return (
-    <RegisterComponent username={username} setUsername={setUsername} email={email} setEmail={setEmail} password={password} setPassword={setPassword} password2={password2} setPassword2={setPassword2} error={error} loading={loading} handleRegister={handleRegister} />
+    <RegisterComponent
+      username={username}
+      setUsername={setUsername}
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      password2={password2}
+      setPassword2={setPassword2}
+      error={error}
+      loading={loading}
+      handleRegister={handleRegister}
+    />
   );
 };
 

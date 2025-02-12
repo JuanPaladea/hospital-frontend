@@ -19,24 +19,24 @@ export const BillsListComponent: React.FC<BillsListComponentProps> = ({
 }) => {
   return (
     <section className="bg-gray-50 p-3 sm:p-5">
-      <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-              <div className="w-full md:w-1/2">
-                <form className="flex items-center">
-                  <div>
-                    <select
-                      value={size}
-                      onChange={handleSize}
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg p-2"
-                    >
-                      <option value={5}>5 per page</option>
-                      <option value={10}>10 per page</option>
-                      <option value={20}>20 per page</option>
-                    </select>
-                  </div>
-                </form>
-              </div>
+            <div className="w-full md:w-1/2">
+              <form className="flex items-center">
+                <div>
+                  <select
+                    value={size}
+                    onChange={handleSize}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg p-2"
+                  >
+                    <option value={5}>5 per page</option>
+                    <option value={10}>10 per page</option>
+                    <option value={20}>20 per page</option>
+                  </select>
+                </div>
+              </form>
+            </div>
             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0 bg-blue-500 text-white rounded hover:bg-blue-600">
               <Link
                 to="/bills/add"
@@ -81,13 +81,29 @@ export const BillsListComponent: React.FC<BillsListComponentProps> = ({
                   {bills.map((bill) => (
                     <tr key={bill.id}>
                       <td className="px-4 py-3">{bill.id}</td>
-                      <td className="px-4 py-3">{bill.patient_id}</td>
+                      <td className="px-4 py-3">
+                        {bill.patient_id}{" "}
+                        <Link
+                          to={`/patients/${bill.patient_id}`}
+                          className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                        >
+                          View
+                        </Link>{" "}
+                      </td>
                       <td className="px-4 py-3">${bill.amount}</td>
                       <td className="px-4 py-3">
                         {new Date(bill.date).toLocaleString()}
                       </td>
                       <td className="px-4 py-3">{bill.status}</td>
-                      <td className="px-4 py-3">{bill.study_id}</td>
+                      <td className="px-4 py-3">
+                        {bill.study_id}{" "}
+                        <Link
+                          to={`/studies/${bill.study_id}`}
+                          className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                        >
+                          View
+                        </Link>{" "}
+                      </td>
                       <td className="px-4 py-3">
                         {new Date(bill.created_at).toLocaleString()}
                       </td>
@@ -95,21 +111,18 @@ export const BillsListComponent: React.FC<BillsListComponentProps> = ({
                         {new Date(bill.updated_at).toLocaleString()}
                       </td>
                       <td className="px-4 py-3 space-x-2">
-                        {/* View Bill (using bill id) */}
                         <Link
                           to={`/bills/${bill.id}`}
                           className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                         >
                           View
                         </Link>
-                        {/* Edit Bill */}
                         <Link
                           to={`/bills/${bill.id}/edit`}
                           className="bg-indigo-500 text-white px-2 py-1 rounded hover:bg-indigo-600"
                         >
                           Edit
                         </Link>
-                        {/* Optionally, you can add a button for uploading payment proof */}
                         <Link
                           to={`/bills/${bill.id}/upload-payment`}
                           className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"

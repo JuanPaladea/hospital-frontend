@@ -12,7 +12,6 @@ const EditPatientPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  // Fetch patient data on component mount
   useEffect(() => {
     if (patientId) {
       setLoading(true);
