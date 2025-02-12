@@ -1,4 +1,3 @@
-// src/layouts/MainLayout.tsx
 import { Navigate, Outlet } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import NavBarComponent from "../components/NavBarComponent";
