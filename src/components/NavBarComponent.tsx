@@ -20,7 +20,7 @@ const NavBarComponent: React.FC = () => {
     <nav className="bg-white w-full z-20 top-0 left-0 border-b border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 2xl:px-0">
         <Link to="/dashboard" className="flex items-center space-x-3">
-          <img src="./src/assets/logo.png" className="h-8" alt="Logo" />
+          <img src="https://i.imgur.com/KVMijTz.png" className="h-8" alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             STANs
           </span>

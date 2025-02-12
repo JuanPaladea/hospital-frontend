@@ -36,7 +36,7 @@ export const RegisterComponent: React.FC<registerComponentProps> = ({
         >
           <img
             className="w-8 h-8 mr-2"
-            src="./src/assets/logo.png"
+            src="https://i.imgur.com/KVMijTz.png"
             alt="logo"
           />
           STANs
