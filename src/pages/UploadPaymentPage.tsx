@@ -31,7 +31,7 @@ const UploadPaymentPage: React.FC = () => {
     setUploading(true);
 
     try {
-      const response = await uploadPayment(id as string, file);
+      await uploadPayment(id as string, file);
       setSuccess("Payment file uploaded successfully.");
     } catch (err: any) {
       setError(err || "File upload failed.");
@@ -42,7 +42,6 @@ const UploadPaymentPage: React.FC = () => {
 
   return (
     <UploadPaymentComponent
-      file={file}
       uploading={uploading}
       error={error}
       success={success}

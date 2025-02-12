@@ -29,7 +29,7 @@ const UploadStudyPage: React.FC = () => {
 
     setUploading(true);
     try {
-      const response = await uploadResult(studyId as string, file);
+      await uploadResult(studyId as string, file);
       setSuccess("File uploaded successfully.");
     } catch (err: any) {
       setError(err || "File upload failed.");
@@ -40,7 +40,6 @@ const UploadStudyPage: React.FC = () => {
 
   return (
     <UploadStudyComponent
-      file={file}
       uploading={uploading}
       error={error}
       success={success}

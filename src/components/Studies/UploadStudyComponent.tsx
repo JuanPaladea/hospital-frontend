@@ -2,7 +2,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 
 interface UploadStudyComponentProps {
-  file: File | null;
   uploading: boolean;
   error: string;
   success: string;
@@ -11,7 +10,6 @@ interface UploadStudyComponentProps {
 }
 
 const UploadStudyComponent: React.FC<UploadStudyComponentProps> = ({
-  file,
   uploading,
   error,
   success,

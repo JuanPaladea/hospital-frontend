@@ -2,7 +2,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 
 interface UploadPaymentComponentProps {
-  file: File | null;
   uploading: boolean;
   error: string;
   success: string;
@@ -11,7 +10,6 @@ interface UploadPaymentComponentProps {
 }
 
 const UploadPaymentComponent: React.FC<UploadPaymentComponentProps> = ({
-  file,
   uploading,
   error,
   success,
